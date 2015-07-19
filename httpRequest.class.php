@@ -49,7 +49,11 @@ class httpRequest {
   
   public function setRandUserAgent() {
     if(!file_exists($this->userAgentsFile)) {
-      throw new Exception('User agents file does not exist');
+      $this->userAgentsFile = dirname(__FILE__).'/'.$this->userAgentsFile;
+      
+      if(!file_exists($this->userAgentsFile)) {
+        throw new Exception('User agents file does not exist');
+      }
     }
     
     $userAgents = file($this->userAgentsFile);
